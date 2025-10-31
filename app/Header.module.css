@@ -1,0 +1,28 @@
+/* app/Header.module.css */
+.wrapper {
+  background-color: #0070f3; /* Màu xanh của Vercel */
+  padding: 1.5rem 2rem;
+  color: white;
+}
+
+.title {
+  font-size: 2rem;
+  margin: 0;
+}
+
+.nav {
+  display: flex;
+  gap: 2rem;
+  margin-top: 1rem;
+}
+
+.nav a { /* Bạn có thể style thẻ 'a' bên trong .nav */
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.nav a:hover {
+  text-decoration: underline;
+  color: yellow;
+}   
