@@ -12,7 +12,8 @@ export default function Header({title}: HeaderProps) {
       <nav className={styles.nav}>
         <Link href="/">Trang Chủ</Link>
         <Link href="/about">Về Chúng Tôi</Link>
-        <Link href="/users">Danh sách Users</Link>
+        <Link href="/users">Danh sách Người dùng</Link>
+        <Link href="/courses">Danh sách Khóa học</Link>
       </nav>
     </header>
   );
