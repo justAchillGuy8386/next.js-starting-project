@@ -16,6 +16,11 @@ const courses = [
         id: 3,
         title: "Khóa học Tailwind CSS",
         level: "Trung bình"
+    },
+    {
+        id: 4,
+        title: "Khóa học TypeScript từ A-Z",
+        level: "Nâng cao"
     }
 ]
 export async function GET(request: Request) {
