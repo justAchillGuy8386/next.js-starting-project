@@ -3,6 +3,7 @@
 import {useForm} from 'react-hook-form';
 import {yupResolver} from '@hookform/resolvers/yup';
 import {officeSchema, OfficeFormData} from '../office.schema';
+import { createOfficeAction } from '../office.actions';
 
 const inputStyle = "block w-full p-1 border border-gray-300 rounded mt-3";
 const labelStyle = "font-medium block mt-5";
@@ -12,15 +13,21 @@ export default function CreateOfficeForm() {
     const {
         register,
         handleSubmit,
-        formState: {errors, isSubmitting}
+        formState: {errors, isSubmitting},
+        reset,
     } = useForm<OfficeFormData>({
         resolver: yupResolver(officeSchema)
     });
 
     const onSubmit = async (data: OfficeFormData) => {
-        await new Promise(resolve => setTimeout(resolve, 2000));
+        const result = await createOfficeAction(data);
 
-        console.log("Dữ liệu gửi đi:", data);
+        if (!result.success) {
+            alert(result.error);
+        } else {
+            alert(result.message);
+            reset();
+        }
     };
 
     return (
