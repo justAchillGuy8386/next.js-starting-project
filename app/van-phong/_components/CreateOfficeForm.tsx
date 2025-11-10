@@ -3,24 +3,26 @@
 import {useForm} from 'react-hook-form';
 import {yupResolver} from '@hookform/resolvers/yup';
 import {officeSchema, OfficeFormData} from '../office.schema';
-import { createOfficeAction } from '../office.actions';
+import { useCreateVanPhong } from '../_hook/useVanPhong';
 
 const inputStyle = "block w-full p-1 border border-gray-300 rounded mt-3";
 const labelStyle = "font-medium block mt-5";
 const errorStyle = "text-red-500 text-sm mt-1";
 
 export default function CreateOfficeForm() {
+    const {isPending, trigger} = useCreateVanPhong();
+
     const {
         register,
         handleSubmit,
-        formState: {errors, isSubmitting},
+        formState: {errors},
         reset,
     } = useForm<OfficeFormData>({
         resolver: yupResolver(officeSchema)
     });
 
     const onSubmit = async (data: OfficeFormData) => {
-        const result = await createOfficeAction(data);
+        const result = await trigger(data);
 
         if (!result.success) {
             alert(result.error);
@@ -38,7 +40,7 @@ export default function CreateOfficeForm() {
                 <input 
                     {...register('name')}
                     className={inputStyle}
-                    disabled={isSubmitting}
+                    disabled={isPending}
                 />
                 {errors.name && <p className={errorStyle}>{errors.name.message}</p>}
             </div>
@@ -48,7 +50,7 @@ export default function CreateOfficeForm() {
                 <input
                     {...register('address')}
                     className={inputStyle}
-                    disabled={isSubmitting}
+                    disabled={isPending}
                 />
                 {errors.address && <p className={errorStyle}>{errors.address.message}</p>}
             </div>
@@ -58,17 +60,17 @@ export default function CreateOfficeForm() {
                 <input
                     {...register('phone')}
                     className={inputStyle}
-                    disabled={isSubmitting}
+                    disabled={isPending}
                 />
                 {errors.phone && <p className={errorStyle}>{errors.phone.message}</p>}
             </div>
 
             <button
                 type="submit"
-                disabled={isSubmitting}
+                disabled={isPending}
                 className="w-full bg-blue-500 text-white p-2 rounded mt-6 hover:bg-blue-600 disabled: bg-gray-400"   
             >
-                {isSubmitting ? "Đang xử lý..." : "Tạo mới"}
+                {isPending ? "Đang xử lý..." : "Tạo mới"}
             </button>
         </form>
     )
