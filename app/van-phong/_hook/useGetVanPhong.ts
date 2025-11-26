@@ -8,26 +8,25 @@ import { createOfficeAction } from "../office.actions";
 import { OfficeFormData } from "../office.schema";
 import { off } from "process";
 
-interface User {
+interface Post {
     id: number;
-    name: string;
-    email: string;
-    phone: string; 
+    title: string;
+    body: string;
 }
 
 const fetcher = (url: string) => axios.get(url).then(res => res.data);
 
-export const VANPHONG_CACHE_KEY = 'https://jsonplaceholder.typicode.com/users';
+export const VANPHONG_CACHE_KEY = 'https://jsonplaceholder.typicode.com/posts';
 
-export function useVanPhong() { // HOOK LẤY DANH SÁCH VĂN PHÒNG
+export function useGetVanPhong() { // HOOK LẤY DANH SÁCH VĂN PHÒNG
     const {
         data,
         error,
         isLoading
-    } = useSWR<User[]>(VANPHONG_CACHE_KEY, fetcher)
+    } = useSWR<Post[]>(VANPHONG_CACHE_KEY, fetcher)
     
     return {
-        offices: data,
+        posts: data,
         isLoading,
         error
     }

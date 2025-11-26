@@ -3,7 +3,7 @@
 import {useForm} from 'react-hook-form';
 import {yupResolver} from '@hookform/resolvers/yup';
 import {officeSchema, OfficeFormData} from '../office.schema';
-import { useCreateVanPhong } from '../_hook/useVanPhong';
+import { useCreateVanPhong } from '../_hook/useGetVanPhong';
 
 const inputStyle = "block w-full p-1 border border-gray-300 rounded mt-3";
 const labelStyle = "font-medium block mt-5";
@@ -26,7 +26,7 @@ export default function CreateOfficeForm() {
 
         if (!result.success) {
             alert(result.error);
-        } else {
+        } else if ('message' in result) {
             alert(result.message);
             reset();
         }

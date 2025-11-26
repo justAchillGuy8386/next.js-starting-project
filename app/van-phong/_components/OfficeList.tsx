@@ -3,11 +3,11 @@
 import useSWR from "swr";
 import axios from "axios";
 import Link from "next/link";
-import { useVanPhong } from "../_hook/useVanPhong";
+import { useGetVanPhong } from "../_hook/useGetVanPhong";
 
 export default function OfficeList() {
-    const{ offices, isLoading, error} = useVanPhong();
-    
+    const{ posts, isLoading, error} = useGetVanPhong();
+
     if (error) return <div className="text-red-500">Tải dữ liệu thất bại...</div>
 
     if (isLoading) return <div className="text-blue-500">Đang tải dữ liệu...</div>
@@ -20,11 +20,10 @@ export default function OfficeList() {
             </Link>
 
             <ul className="space-y-4">
-                {offices?.map(office => (
-                    <li key={office.id} className="p-4 border rounded-lg shadow-sm bg-white">
-                        <h3 className="text-xl font-semibold">{office.name}</h3>
-                        <p className="text-gray-600">{office.email}</p>
-                        <p className="text-gray-600">{office.phone}</p>
+                {posts?.map(post => (
+                    <li key={post.id} className="p-4 border rounded-lg shadow-sm bg-white">
+                        <h3 className="text-xl font-semibold">{post.title}</h3>
+                        <p className="text-gray-600">{post.body}</p>
                     </li>
                 ))}
             </ul>
