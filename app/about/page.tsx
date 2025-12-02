@@ -1,3 +1,10 @@
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Về Chúng Tôi | Học Next.js",
+  description: "Trang giới thiệu về dự án học Next.js",
+}
+
 export default function AboutPage() {
   return (
     <main style={{ padding: '15px', border: '1px solid blue', margin: '10px 0' }}>

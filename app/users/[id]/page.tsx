@@ -1,6 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { notFound } from "next/navigation";
+import { Metadata } from "next";
 
 interface User {
     id: number;
@@ -13,6 +14,16 @@ interface User {
 interface UserDetailPageProps {
     params: {
         id: string
+    }
+}
+
+export async function generateMetadata({params}: UserDetailPageProps): Promise<Metadata> {
+    const{id} = params;
+    const response = await fetch (`https://jsonplaceholder.typicode.com/users/${id}`);
+    const user: User = await response.json();
+    return {
+        title: user.name + " | Hồ sơ người dùng",
+        description: `Xem hồ sơ chi tiết của ${user.name}`,
     }
 }
 

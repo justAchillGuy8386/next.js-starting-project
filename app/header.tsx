@@ -15,6 +15,7 @@ export default function Header({title}: HeaderProps) {
         <Link href="/users">Danh sách Người dùng</Link>
         <Link href="/courses">Danh sách Khóa học</Link>
         <Link href="/van-phong">Văn phòng</Link>
+        <Link href="/orgchart">Sơ đồ tổ chức</Link>
       </nav>
     </header>
   );
